@@ -1,0 +1,38 @@
+---
+const dataFetched = await fetch('https://test-backend-nestjs-idlm.onrender.com/api/testing')
+
+const { data } = (await dataFetched.json());
+---
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Testing</title>
+</head>
+<body>
+	<h1>{data.helloWorld}</h1>
+	{ 
+		data
+		? (
+			data?.testData.length
+			? (
+				data?.testData?.map((item: any) => {
+					return <p>✅ {item.title}</p>
+				}) 
+			)
+			: (
+				<p>No hello world today :c</p>
+			)
+		)
+		: (
+			<h1>spinner...</h1>
+		)
+	}
+</body>
+</html>
+<style>
+	body {
+		background-color: black;
+		color: white;
+	}
+</style>

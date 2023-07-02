@@ -1,0 +1,30 @@
+---
+import { TestComponent } from "../components/TestComponent";
+async function getData() {
+  try {
+    const dataFetched = await fetch('https://test-backend-nestjs-idlm.onrender.com/api/testing')
+    return (await dataFetched.json()).data;
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
+}
+const data = await getData();
+---
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dinamic</title>
+</head>
+<body>
+  <TestComponent helloData={data} client:load />
+</body>
+</html>
+<style>
+	body {
+		background-color: black;
+		color: white;
+	}
+</style>
