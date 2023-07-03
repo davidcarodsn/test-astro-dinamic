@@ -2,7 +2,7 @@
 import { TestComponent } from "../components/TestComponent";
 async function getData() {
   try {
-    const dataFetched = await fetch('https://test-backend-nestjs-idlm.onrender.com/api/testing')
+    const dataFetched = await fetch('http://localhost:8080/api/testing')
     return (await dataFetched.json()).data;
   } catch (error) {
     console.log(error);
@@ -19,7 +19,7 @@ const data = await getData();
   <title>Dinamic</title>
 </head>
 <body>
-  <TestComponent helloData={data} client:load />
+  <TestComponent client:load />
 </body>
 </html>
 <style>

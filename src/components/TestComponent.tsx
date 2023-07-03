@@ -1,12 +1,25 @@
 import React, { useEffect, useState } from 'react'
 
-export const TestComponent = ({ helloData }: any) => {
+async function getData() {
+  try {
+    const dataFetched = await fetch('https://test-backend-nestjs-idlm.onrender.com/api/testing')
+    return (await dataFetched.json()).data;
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
+}
+
+export const TestComponent = () => {
   const [data, setData] = useState<any>();
 
   useEffect(() => {
-    setData(helloData);
-    console.log(helloData)
-  }, [helloData])
+    getData()
+      .then(res => {
+        console.log(res.testData)
+        setData(res)
+      })
+  }, [])
   return (
     <>
       <h1>Let's see if it is dinamyc in React too</h1>
@@ -14,7 +27,7 @@ export const TestComponent = ({ helloData }: any) => {
       { 
         data
         ? (
-          data?.testData.length
+          data?.testData?.length
           ? (
             data?.testData?.map((item: any) => {
               return <p key={item.title}>✅ {item.title}</p>
